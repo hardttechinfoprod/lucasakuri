@@ -741,175 +741,135 @@ button {
    Serviços Section
    =================================== */
 /* ============================================================
-   SERVIÇOS REFINEMENT - LUXURY INTERFACE SYSTEM
+   SERVIÇOS REFINEMENT - 4 COLUMNS DESKTOP GRID
    ============================================================ */
 :root {
   --s-card-bg: #ffffff;
-  --s-card-border: rgba(0, 0, 0, 0.05);
-  --s-text-main: #0a0a0a;
+  --s-card-border: rgba(0, 0, 0, 0.06);
   --s-text-muted: rgba(0, 0, 0, 0.55);
-  --s-accent: #000000;
-  --s-easing: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --s-easing-apple: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .servicos {
-  padding: 100px 0;
-  background-color: #fafafa; /* Leve contraste com o fundo geral */
-}
-
-@media (min-width: 1024px) {
-  .servicos { padding: 140px 0; }
+  padding: 80px 0;
+  background-color: #fafafa;
 }
 
 .servicos-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: 20px;
   margin-top: 50px;
 }
 
-@media (min-width: 640px) {
-  .servicos-grid { grid-template-columns: repeat(2, 1fr); }
+/* Mobile landscape / Tablets */
+@media (min-width: 480px) {
+  .servicos-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
 }
 
+/* Desktop - AJUSTE PARA 4 COLUNAS */
 @media (min-width: 1024px) {
-  .servicos-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+  .servicos-grid { 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 24px; /* Gap levemente menor para caber 4 cards confortavelmente */
   }
 }
 
-/* Card Design Refinement */
 .servico-card {
   background-color: var(--s-card-bg);
   border: 1px solid var(--s-card-border);
-  border-radius: 12px; /* Raio suavizado para look moderno */
+  border-radius: 24px;
   display: flex;
   flex-direction: column;
-  transition: all 0.5s var(--s-easing);
-  position: relative;
+  transition: all 0.6s var(--s-easing-apple);
   overflow: hidden;
+  height: 100%;
 }
 
 .servico-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-10px);
   border-color: rgba(0, 0, 0, 0.1);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.08);
 }
 
-/* Image/Number Area Refinement */
 .servico-image {
-  aspect-ratio: 16 / 10;
-  background-color: #fdfdfd;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  width: 100%;
+  aspect-ratio: 3 / 4; 
+  background-color: #000;
   overflow: hidden;
 }
 
-/* Efeito de Gradiente sutil no fundo do número */
+.servico-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  object-position: center;
+  transition: transform 1.5s var(--s-easing-apple);
+  display: block;
+}
+
+.servico-card:hover .servico-image img {
+  transform: scale(1.08);
+}
+
+/* Sombra interna nas fotos */
 .servico-image::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.01) 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, transparent 20%, rgba(0,0,0,0.15) 100%);
+  pointer-events: none;
 }
 
-.servico-number {
-  font-family: var(--font-main);
-  font-size: 110px;
-  font-weight: 200;
-  color: rgba(0, 0, 0, 0.03);
-  letter-spacing: -0.05em;
-  line-height: 1;
-  transition: all 0.6s var(--s-easing);
-  z-index: 1;
-}
-
-@media (min-width: 768px) {
-  .servico-number { font-size: 130px; }
-}
-
-.servico-card:hover .servico-number {
-  color: rgba(0, 0, 0, 0.06);
-  transform: scale(1.1);
-}
-
-/* Content Refinement */
+/* Ajuste de conteúdo para cards mais estreitos */
 .servico-content {
-  padding: 32px;
+  padding: 24px; /* Padding reduzido de 32px para 24px para melhor respiro em 4 colunas */
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
 .servico-title {
-  font-family: var(--font-main);
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 18px; /* Reduzi levemente de 22px para evitar quebras de linha excessivas */
+  font-weight: 600;
   letter-spacing: -0.02em;
-  color: var(--s-text-main);
-  margin-bottom: 16px;
+  color: #000;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+@media (min-width: 1200px) {
+  .servico-title { font-size: 20px; }
 }
 
 .servico-desc {
-  font-family: var(--font-main);
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 14px; /* Reduzi levemente de 15px */
+  line-height: 1.5;
   color: var(--s-text-muted);
-  margin-bottom: 32px;
-  flex-grow: 1; /* Garante que o CTA fique sempre alinhado na base */
+  margin-bottom: 24px;
+  flex-grow: 1;
 }
 
-/* Link/CTA Refinement (Apple Style) */
 .servico-link {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--s-text-main);
-  text-decoration: none;
-  transition: all 0.3s var(--s-easing);
-  width: fit-content;
-  position: relative;
-}
-
-.servico-link span {
-  position: relative;
-}
-
-/* Underline animado Stripe style */
-.servico-link span::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 100%;
-  height: 1.5px;
-  background-color: var(--s-text-main);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.4s var(--s-easing);
-}
-
-.servico-link:hover span::after {
-  transform: scaleX(1);
-  transform-origin: left;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
 }
 
 .servico-link svg {
-  transition: transform 0.4s var(--s-easing);
-  opacity: 0.8;
+  transition: transform 0.4s var(--s-easing-apple);
 }
 
 .servico-link:hover svg {
-  transform: translateX(6px);
-  opacity: 1;
+  transform: translateX(5px);
 }
-
 /* ===================================
    Sobre Section
    =================================== */
@@ -1074,20 +1034,18 @@ button {
    Tecnologia Section
    =================================== */
 /* ============================================================
-   TECNOLOGIA REFINEMENT - HIGH-TECH LUXURY (DARK)
+   TECNOLOGIA REFINEMENT - 2x2 GRID SYSTEM (STRIPE STYLE)
    ============================================================ */
 :root {
   --t-bg: #000000;
-  --t-card-bg: #0a0a0a;
-  --t-border: rgba(255, 255, 255, 0.08);
-  --t-text-main: #ffffff;
+  --t-card-bg: #000000;
+  --t-border: rgba(255, 255, 255, 0.1); 
   --t-text-muted: rgba(255, 255, 255, 0.5);
-  --easing-apple: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --easing-apple: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tecnologia {
   background-color: var(--t-bg);
-  color: var(--t-text-main);
   padding: 100px 0;
   overflow: hidden;
 }
@@ -1096,39 +1054,37 @@ button {
   .tecnologia { padding: 160px 0; }
 }
 
-/* Grid Refinement - Estilo Stripe/Apple de linhas finas */
+/* Grid System - Linhas finas conforme o print */
 .tecnologia-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1px;
-  background-color: var(--t-border); /* Cria as linhas de divisão */
+  gap: 1px; /* Espaço que vira a linha divisória */
+  background-color: var(--t-border); 
   border: 1px solid var(--t-border);
   margin-bottom: 64px;
-  border-radius: 1px; /* Look técnico, bordas secas */
 }
 
 @media (min-width: 768px) {
   .tecnologia-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* Layout 2x2 */
   }
 }
 
 /* Card Design */
 .tecnologia-card {
   background-color: var(--t-bg);
-  padding: 48px 32px;
-  transition: all 0.6s var(--easing-apple);
+  padding: 40px 32px;
+  transition: background-color 0.4s var(--easing-apple);
   display: flex;
   flex-direction: column;
 }
 
 @media (min-width: 1024px) {
-  .tecnologia-card { padding: 64px 48px; }
+  .tecnologia-card { padding: 80px 60px; } /* Respiro premium Apple Pro */
 }
 
 .tecnologia-card:hover {
-  background-color: var(--t-card-bg);
-  box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.03);
+  background-color: #0a0a0a;
 }
 
 /* Typography Refinement */
@@ -1136,31 +1092,35 @@ button {
   font-family: var(--font-main);
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   color: var(--t-text-muted);
   text-transform: uppercase;
   margin-bottom: 32px;
-  display: block;
 }
 
 .tecnologia-title {
   font-family: var(--font-main);
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 500;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   color: #ffffff;
   margin-bottom: 20px;
+  line-height: 1.1;
+}
+
+@media (min-width: 1024px) {
+  .tecnologia-title { font-size: 32px; }
 }
 
 .tecnologia-desc {
   font-family: var(--font-main);
   font-size: 15px;
-  line-height: 1.65;
+  line-height: 1.6;
   color: var(--t-text-muted);
-  max-width: 300px;
+  max-width: 380px;
 }
 
-/* Button Secondary Refinement (Dark Style) */
+/* Button & CTA */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -1183,20 +1143,12 @@ button {
   box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
 }
 
-.btn-secondary svg {
-  transition: transform 0.4s var(--easing-apple);
-}
-
-.btn-secondary:hover svg {
-  transform: translateX(5px);
-}
-
 .tecnologia-cta {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
-/* Refinamento da Seção Light (Inversão de Cores) */
+/* Header Adjustments */
 .section-header-light .section-title {
   color: #ffffff;
 }
@@ -1204,51 +1156,63 @@ button {
 .section-label-light {
   color: var(--t-text-muted) !important;
 }
-
 /* ===================================
    Estrutura Section
    =================================== */
 /* ============================================================
-   ESTRUTURA REFINEMENT - CINEMATIC & SPEC GRID
+   ESTRUTURA REFINEMENT - CINEMATIC SIDE-BY-SIDE (DESKTOP)
    ============================================================ */
-:root {
-  --e-text-main: #0a0a0a;
-  --e-text-muted: rgba(0, 0, 0, 0.55);
-  --e-white: #ffffff;
-  --e-easing: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
 .estrutura {
   padding: 0;
-  background-color: var(--e-white);
+  background-color: #ffffff;
 }
 
-/* Imagem Hero da Estrutura */
+/* Wrapper: Vertical no Mobile, Lado a Lado no Desktop */
 .estrutura-image-wrapper {
   position: relative;
-  height: 80vh; /* Aumentado para mais imponência */
+  height: 90vh; /* Mantém a altura imersiva */
   min-height: 600px;
+  display: flex;
+  flex-direction: column; /* Mobile First: Empilhado */
   overflow: hidden;
   background-color: #000;
 }
 
-.estrutura-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 2s var(--e-easing);
-  filter: saturate(1.1) brightness(0.9);
+@media (min-width: 1024px) {
+  .estrutura-image-wrapper {
+    flex-direction: row; /* Desktop: Lado a Lado (Estilo Awwwards) */
+    height: 85vh;
+  }
 }
 
+.estrutura-image {
+  width: 100%;
+  height: 50%; /* Metade da altura no mobile */
+  object-fit: cover;
+  transition: transform 2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+  filter: brightness(0.8);
+}
+
+@media (min-width: 1024px) {
+  .estrutura-image {
+    width: 50%; /* Metade da largura no desktop */
+    height: 100%; /* Altura total no desktop */
+    filter: brightness(0.7); /* Mais contraste para o texto no desktop */
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .estrutura-image:last-of-type { border-right: none; }
+}
+
+/* Efeito de Zoom individual */
 .estrutura-image-wrapper:hover .estrutura-image {
-  transform: scale(1.05);
+  transform: scale(1.04);
+  filter: brightness(0.9);
 }
 
 /* Overlay Cinematográfico */
 .estrutura-overlay {
   position: absolute;
   inset: 0;
-  /* Gradiente mais suave e moderno (estilo Apple TV) */
   background: linear-gradient(to top, 
     rgba(0, 0, 0, 0.8) 0%, 
     rgba(0, 0, 0, 0.2) 50%, 
@@ -1257,33 +1221,31 @@ button {
   flex-direction: column;
   justify-content: flex-end;
   padding: 60px 24px;
+  pointer-events: none;
 }
 
 @media (min-width: 1024px) {
   .estrutura-overlay {
-    padding: 100px 80px;
+    padding: 100px;
+    background: linear-gradient(to top, 
+      rgba(0, 0, 0, 0.7) 0%, 
+      transparent 100%);
+    align-items: center; /* Centraliza o texto no desktop */
+    text-align: center;
   }
 }
 
-.estrutura-content-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-}
-
 .estrutura-title {
-  font-family: var(--font-main);
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
   line-height: 1.05;
   letter-spacing: -0.04em;
-  color: var(--e-white);
-  margin-bottom: 24px;
+  color: #ffffff;
+  margin-bottom: 20px;
 }
 
 .estrutura-address {
   display: inline-flex;
   align-items: center;
-  font-family: var(--font-main);
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -1293,7 +1255,11 @@ button {
   padding-left: 20px;
 }
 
-/* Features Grid - Look "Tech Spec" */
+@media (max-width: 1023px) {
+  .estrutura-address { border-left: none; padding-left: 0; }
+}
+
+/* Features Grid */
 .estrutura-features {
   display: grid;
   grid-template-columns: 1fr;
@@ -1307,53 +1273,26 @@ button {
   .estrutura-features {
     grid-template-columns: repeat(3, 1fr);
     gap: 60px;
-    padding: 120px 48px;
+    padding: 100px 48px;
   }
 }
 
 .estrutura-feature {
-  text-align: left; /* Alinhamento à esquerda é mais premium para listas técnicas */
   position: relative;
 }
 
 .feature-title {
-  font-family: var(--font-main);
   font-size: 18px;
   font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--e-text-main);
+  color: #0a0a0a;
   margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Detalhe de linha superior na feature para ritmo visual */
-.estrutura-feature::before {
-  content: '';
-  position: absolute;
-  top: -24px;
-  left: 0;
-  width: 30px;
-  height: 1px;
-  background-color: var(--e-text-main);
-  opacity: 0.15;
 }
 
 .feature-desc {
-  font-family: var(--font-main);
   font-size: 15px;
   line-height: 1.6;
-  color: var(--e-text-muted);
-  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
 }
-
-/* Micro-hover na feature */
-.estrutura-feature:hover .feature-title {
-  transform: translateX(4px);
-  transition: transform 0.3s var(--e-easing);
-}
-
 /* ===================================
    Depoimentos Section
    =================================== */
